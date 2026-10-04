@@ -1,3 +1,8 @@
+> **Fork pédagogique** utilisé dans un cours Kubernetes. Seul le service `vote/` est modifié :
+> version affichée (`APP_VERSION`), design v2, bug volontaire en v3 (`VOTE_TITLE` requis), nom du pod affiché,
+> routes `/healthz` et `/crash`, interface en français. Images : `ghcr.io/bngams/kube-vote:{1.0,2.0,3.0}`
+> (workflow `.github/workflows/vote-images.yml`). Les autres services sont inchangés.
+
 # Example Voting App
 
 A simple distributed application running across multiple Docker containers.

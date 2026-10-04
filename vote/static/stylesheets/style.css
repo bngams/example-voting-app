@@ -1,4 +1,4 @@
-@import url(//fonts.googleapis.com/css?family=Open+Sans:400,700,600);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
 
 *{
   box-sizing:border-box;
@@ -126,4 +126,48 @@ button.b{
   margin-bottom:-4px;
   width:50%;
   height:100%;
+}
+
+/* --- Ajouts du fork pédagogique : badge de version + design v2 --- */
+#version{
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #254356;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#version span{
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* v2 et v3 : nouveau design, bien visible lors d'une mise à jour */
+body.v2, body.v3{
+  background: linear-gradient(135deg, #2b1055 0%, #7597de 100%);
+}
+
+body.v2 h3, body.v3 h3,
+body.v2 #hostname, body.v3 #hostname,
+body.v2 #tip, body.v3 #tip{
+  color: white;
+}
+
+body.v2 button.a, body.v3 button.a{
+  background-color: #ff7a59;
+  border-radius: 16px;
+}
+
+body.v2 button.b, body.v3 button.b{
+  background-color: #ffc94d;
+  border-radius: 16px;
+}
+
+body.v2 #version, body.v3 #version{
+  background: #ff7a59;
 }
