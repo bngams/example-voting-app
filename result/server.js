@@ -63,13 +63,29 @@ function collectVotesFromResult(result) {
   return votes;
 }
 
+// Fork pédagogique : libellés des deux options configurables (OPTION_A / OPTION_B), comme pour vote.
+var fs = require('fs');
+var path = require('path');
+var optionA = process.env.OPTION_A || 'Cats';
+var optionB = process.env.OPTION_B || 'Dogs';
+function escapeHtml(text) {
+  return String(text).replace(/[&<>"'{}]/g, function (c) {
+    return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '{': '&#123;', '}': '&#125;'}[c];
+  });
+}
+var indexHtml = fs.readFileSync(path.resolve(__dirname + '/views/index.html'), 'utf8')
+  .replace('<title>Cats vs Dogs -- Result</title>', '<title>' + escapeHtml(optionA) + ' / ' + escapeHtml(optionB) + ' -- Résultats</title>')
+  .replace('<div class="label">Cats</div>', '<div class="label">' + escapeHtml(optionA) + '</div>')
+  .replace('<div class="label">Dogs</div>', '<div class="label">' + escapeHtml(optionB) + '</div>');
+
 app.use(cookieParser());
 app.use(express.urlencoded());
-app.use(express.static(__dirname + '/views'));
 
-app.get('/', function (req, res) {
-  res.sendFile(path.resolve(__dirname + '/views/index.html'));
+app.get(['/', '/index.html'], function (req, res) {
+  res.type('html').send(indexHtml);
 });
+
+app.use(express.static(__dirname + '/views', { index: false }));
 
 server.listen(port, function () {
   var port = server.address().port;
